@@ -5,6 +5,7 @@ const TrainReservation = () => {
   const [seats, setSeats] = useState([]);
   const [numSeats, setNumSeats] = useState("");
   const [book,setBook]=useState([])
+  const [msg,setMsg]=useState("")
 
   useEffect(() => {
     // Fetch all seats from the backend
@@ -34,8 +35,13 @@ const TrainReservation = () => {
     try {
       await axios.post('https://kind-teal-fossa-veil.cyclic.app/seat/reserve', { numSeats: parseInt(numSeats) }).then((res)=>{
         console.log(res.data.message);
-        setBook(res.data.message)
-        console.log(numSeats)
+        
+        if(res.data.message){
+          setBook(res.data.message)
+          
+        }
+        console.log(res)
+        
       })
       
       // Refresh the seat data after reservation
@@ -49,10 +55,12 @@ const TrainReservation = () => {
          y.sort(compare)
         setSeats(y);
         setNumSeats('');
+        setMsg("")
      })
       
     } catch (error) {
       console.error(error.response.data.error);
+      setMsg(error.response.data.error)
     }
   };
 
@@ -70,6 +78,7 @@ const TrainReservation = () => {
         let y=res.data.seats
          y.sort(compare)
         setSeats(y)
+        setBook([])
       })
     } catch (error) {
       console.error(error.response.data.error);
@@ -106,11 +115,16 @@ const TrainReservation = () => {
         
           <div style={{display:"flex",gap:"10px",marginTop:"20px"}}>
             <h4> Booked Seats No:-</h4>
-          {book.map((el)=>(
+            {
+          book.map((el)=>(
             
            <p>{el}</p>
              
             ))}
+           </div>
+
+           <div>
+            <h4 style={{color:"red"}}>{msg}</h4>
            </div>
            </div>
     </div>
