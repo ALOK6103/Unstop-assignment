@@ -40,7 +40,9 @@ const TrainReservation = () => {
           setBook(res.data.message)
           
         }
+        
         console.log(res)
+
         
       })
       
@@ -88,16 +90,27 @@ const TrainReservation = () => {
   return (
     <div style={{display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column",marginBottom:"50px"}}>
       <h1>Train Reservation</h1>
+      <div style={{marginBottom:"15px"}}>
+        <div style={{display:"flex"}}>
+        <div style={{width:"30px",height:"30px",backgroundColor:"yellow"}}></div>
+        <div>-Unreserved Seats</div>
+        </div>
+        <div style={{display:"flex"}}>
+        <div style={{width:"30px",height:"30px",backgroundColor:"greenyellow"}}></div>
+        <div>-Reserved Seats</div>
+        </div>
+      </div>
       <div>
-        <label htmlFor="numSeats">Number of Seats:</label>
+        <label htmlFor="numSeats" style={{fontSize:"25px"}}>Number of Seats:</label>
         <input
+          style={{height:"38px"}}
           type="number"
           id="numSeats"
           value={numSeats}
           onChange={(e) => setNumSeats(e.target.value)}
         />
-        <button onClick={reserveSeats}>Reserve Seats</button>
-        <button style={{color:"orange",width:"200px",marginLeft:"10px",height:"40px"}} onClick={resetSeats}>Reset Seats</button>
+        <button style={{color:"black",width:"200px",marginLeft:"5px",height:"40px",fontSize:"25px"}}  onClick={reserveSeats}>Reserve Seats</button>
+        <button style={{color:"orange",width:"200px",marginLeft:"10px",height:"40px",fontSize:"25px"}} onClick={resetSeats}>Reset Seats</button>
       </div>
       <div style={{display:"flex",gap:"50px"}}>
       <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:"10px",marginTop:"50px",alignItems:"center"}}>
@@ -112,7 +125,7 @@ const TrainReservation = () => {
           
           ))}
            </div>
-        
+        <div >
           <div style={{display:"flex",gap:"10px",marginTop:"20px"}}>
             <h4> Booked Seats No:-</h4>
             {
@@ -125,6 +138,7 @@ const TrainReservation = () => {
 
            <div>
             <h4 style={{color:"red"}}>{msg}</h4>
+           </div>
            </div>
            </div>
     </div>
