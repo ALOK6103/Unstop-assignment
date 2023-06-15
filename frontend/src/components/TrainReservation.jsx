@@ -63,6 +63,7 @@ const TrainReservation = () => {
     } catch (error) {
       console.error(error.response.data.error);
       setMsg(error.response.data.error)
+      setBook([])
     }
   };
 
